@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.role.dao.BlogMapper">
+    <insert id="add" parameterType="blog">
+        insert into blog (id,username,title,content,imgUrl,releaseTime)
+        values (
+            #{id},
+            #{username},
+            #{title},
+            #{content},
+            #{imgUrl},
+            #{releaseTime}
+        )
+    </insert>
+    <delete id="remove">
+        delete from blog where id=#{id}
+    </delete>
+
+    <update id="update">
+        update blog set
+            username=#{username},
+            title=#{title},
+            content=#{content},
+            imgUrl=#{imgUrl},
+            releaseTime=#{releaseTime}
+        where id=#{id}
+    </update>
+
+    <select id="findAll" resultType="Blog">
+        select * from blog
+    </select>
+    <select id="queryById" resultType="Blog">
+        select * from blog where id=#{id}
+    </select>
+    <select id="queryByKeyWord" resultType="Blog">
+        select * from blog where title like CONCAT('%',#{keyword},'%') or content like  CONCAT('%',#{keyword},'%')
+    </select>
+</mapper>
